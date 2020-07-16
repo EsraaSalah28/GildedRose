@@ -1,0 +1,10 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'custom.css' %}">
+
+<a href="/">Home</a>
+<a href="/create">+Add Item</a>
+<a href="/show">All Items</a>
+
+<!-- Page Content loads here -->
+{% block content %}
+{% endblock %}

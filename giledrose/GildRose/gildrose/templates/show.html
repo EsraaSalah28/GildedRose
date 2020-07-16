@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<table class="">
+    <thead>
+    <tr>
+
+        <th>Item Name</th>
+        <th>Sell_in</th>
+        <th>Quality Value</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in itemData %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.sellIn }}</td>
+        <td>{{ item.qaulityValue }}</td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

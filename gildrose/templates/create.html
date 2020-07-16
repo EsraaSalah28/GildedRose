@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form method="POST" class="post-form" action="/create">
+    {% csrf_token %}
+
+    <label>Name</label>
+    {{ form.name }}
+
+    <label>Sell_In</label>
+    {{ form.sellIn }}
+
+    <label>Quality Value</label>
+    {{ form.qaulityValue }}
+
+    <label for="type">Choose a type:</label>
+
+    <select name="type" id="type">
+        <option value="reg">Regular Item</option>
+        <option value="AgedBrie">Aged Brie</option>
+        <option value="Sulfuras">Sulfuras</option>
+        <option value="Backstage">Backstage</option>
+        <option value="Conjured">Conjured</option>
+    </select>
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

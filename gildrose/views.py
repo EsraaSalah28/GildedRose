@@ -35,5 +35,6 @@ def create(request):
 #Route '/show'
 #Retrieve all contacts data from database and send it to 'show.html' to be rendered.
 def show(request):
-    itemData = Item.objects.all()
-    return render(request,"show.html",{'itemData':itemData })
+    if request.method == 'GET':
+        itemData = Item.objects.all()
+        return render(request, "show.html", {'itemData': itemData })

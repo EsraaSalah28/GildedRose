@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from GildRose.gildrose.views import show,index
+from gildrose import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 #Index Route
 #localhost:8000/route
-path('', index),
+path('', views.index),
 
 #Create Contact Route
 #localhost:8000/create

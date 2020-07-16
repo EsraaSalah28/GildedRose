@@ -6,3 +6,4 @@ class Item(models.Model):
     name=models.CharField(max_length=100)
     sellIn=models.FloatField()
     qaulityValue=models.IntegerField()
+    itemType = models.CharField(max_length= 20, default='reg')

@@ -4,19 +4,13 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from gildrose.forms import ItemForm
 from gildrose.models import Item
+from gildrose import qualityChecker
 
 
-##Index View (Home Page)
-#Route '/' (localhost:8000)
 def index(request):
     return render(request,'index.html')
 
 
-##Create View
-#Route '/create' (as per urls.py)
-#If: this view is called with "POST" request then the form is validated
-#and saved to database, and then redirected to route '/show'.
-#Else: it will render the contact form in index.html and display it.
 def create(request):
     if request.method == "POST":
         form = ItemForm(request.POST)
@@ -31,10 +25,26 @@ def create(request):
     return render(request,'create.html',{'form':form})
 
 
-##Show View
-#Route '/show'
-#Retrieve all contacts data from database and send it to 'show.html' to be rendered.
 def show(request):
     if request.method == 'GET':
         itemData = Item.objects.all()
-        return render(request, "show.html", {'itemData': itemData })
+    return render(request, "show.html", {'itemData': itemData })
+
+def update(request):
+    itemData = Item.objects.all()
+    form = ItemForm(request.POST)
+    for item in itemData:
+        if item.itemType == 'AgedBrie':
+            qualityChecker.AgedBrie(item.name, item.sellIn, item.qaulityValue).update_quality()
+        elif item.itemType == "Sulfuras":
+            qualityChecker.Sulfuras(item.name, item.sellIn, item.qaulityValue).update_quality()
+        elif item.itemType == "Backstage":
+            qualityChecker.Backstage(item.name, item.sellIn, item.qaulityValue).update_quality()
+        elif item.itemType == "Conjured":
+            qualityChecker.Conjured(item.name, item.sellIn, item.qaulityValue).update_quality()
+        else:
+            qualityChecker.RegularItem(item.name, item.sellIn, item.qaulityValue).update_quality()
+    if form.is_valid():
+        form.save()
+
+
